@@ -1,56 +1,46 @@
 <template>
     <main id='main'>
-          <invent v-for='product in products' :key='product.article' v-bind:invent_data='product'/>
+          <invent v-for='product in PRODUCTS'
+          :key='product.article'
+          :invent_data='product'
+          @send-artic='showCh'/>
     </main>
 </template>
 
 <script>
 import Invent from './Main_html/Invent.vue'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Main_html',
+
   components: {
       Invent,
   },
+
+  methods: {
+      test(){alert('test')},
+
+      showCh(artic){
+          console.log(artic)
+      },
+
+      ...mapActions([        //для this
+          'GET_PRODUCTS_API'
+      ]),
+  },
+
+  computed: {
+      ...mapGetters([       //чтоб не писать this.$store.state.product
+          'PRODUCTS'
+      ])
+  },
+
+  mounted(){
+      this.GET_PRODUCTS_API()
+  },
   data(){
       return{
-
-          products: [
-                {
-                  image: '1.jpg',
-                  name: 'T-shirt 1',
-                  price: 2100,
-                  article: 'T1',
-                  available: true,
-                  category: 'Мужские'
-                },
-                {
-                  image: '2.jpg',
-                  name: 'T-shirt 2',
-                  price: 3150,
-                  article: 'T2',
-                  available: true,
-                  category: 'Женские'
-                },
-                {
-                  image: '3.jpg',
-                  name: 'T-shirt 3',
-                  price: 4200,
-                  article: 'T3',
-                  available: false,
-                  category: 'Женские'
-                },
-                {
-                  image: '4.jpg',
-                  name: 'T-shirt 4',
-                  price: 5300,
-                  article: 'T4',
-                  available: true,
-                  category: 'Мужские'
-                },
-              ]
-
-
 
       }
   }

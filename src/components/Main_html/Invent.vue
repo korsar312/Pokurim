@@ -17,7 +17,7 @@
     </div>каретка тут будет
     <div>
     </div>
-    <button>Купить
+    <button @click='sendToPerrent'>Купить
     </button>
     <div>
       </div>
@@ -30,15 +30,20 @@
 export default {
   name: 'Invent',
   props: {
-      'invent_data': {
-          type: Object,
-          default(){
+      'invent_data': {      //название передал родитель
+          type: Object,     //правило хорошего тона
+          default(){        //изначально он пустой должен быть
               return{}
           }
       }
   },
   components: {
 
+  },
+  methods:{
+      sendToPerrent(){   //1.вызываем где-то этот метод
+          this.$emit('send-artic', this.invent_data.article) //2.прописываем переменную получения(стиль: кебаб-кейс) и что отправляем из ребенка
+      }    //3.прописываем в родителе метод что делать с инфой(showCh()) и откуда получать(@send-artic) (@send-artic='showCh'/>)
   }
 }
 </script>
