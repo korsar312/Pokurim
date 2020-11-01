@@ -1,26 +1,78 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Filter_html/>
+    <Header_html/>
+    <See_html/>
+    <Main_html/>
+    <Footer_html/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Filter_html from './components/Filter_html.vue'
+import Header_html from './components/Header_html.vue'
+import See_html from './components/See_html.vue'
+import Main_html from './components/Main_html.vue'
+import Footer_html from './components/Footer_html.vue'
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+    name: 'App',        //имя компонента
+    computed: {},       //вычисляемые свойства компонента (не можем изменять изначальные данные, но можем создать новые на их основе)
+    props: {},          //данные родительского компонента
+    methods(){},        //функции
+    watch: {},          //следить за чем-либо и в случае изменения что-то делать
+    data(){             //персональные данные компонента
+        return{}
+    },
+    components: {       //инициализирование других компонентов
+      Filter_html,
+      Footer_html,
+      Header_html,
+      Main_html,
+      See_html,
+    }
   }
-}
-</script>
+  //хуки
+  // beforeCreate(){}   //Вызывается синхронно сразу после инициализации экземпляра, до настройки наблюдения за данными, механизмов слежения и событий.
+  // created(){}        //Вызывается синхронно сразу после создания экземпляра. На этом этапе экземпляр закончил обработку опций и настроил наблюдение за данными, вычисляемые свойства, методы, коллбэки слежения и событий. Однако, фаза монтирования ещё не начата, и свойство $el ещё не доступно.
+  // beforeMount(){}    //Вызывается перед началом монтирования, перед первым вызовом функции render.
+  // mounted(){}        //Вызывается сразу после монтирования экземпляра, когда взамен el создан vm.$el. Если корневой экземпляр смонтирован на элемент документа, vm.$el тоже будет элементом документа.
+  // beforeUpdate(){}   //Вызывается при изменении данных перед тем, как DOM будет обновляться. Это хорошее место для получения доступа к существующему DOM перед обновлением, например чтобы удалить добавленные слушатели событий.
+  // updated(){}        //Вызывается после того, как виртуальный DOM был обновлён из-за изменения данных. Для реагирования на изменения состояния лучше использовать вычисляемые свойства или отслеживание с помощью watch.
+  // activated(){}      //Вызывается при активации компонента внутри <keep-alive>.
+  // deactivated(){}    //Вызывается после деактивации компонента внутри <keep-alive>.
+  // beforeDestroy(){}  //Вызывается перед уничтожением экземпляра Vue. На этом этапе экземпляр всё ещё полностью функционален.
+  // destroyed(){}      //Вызывается после уничтожения экземпляра Vue. К моменту вызова этого хука, все директивы экземпляра Vue уже отвязаны, все подписчики событий удалены, а все дочерние экземпляры Vue уничтожены.
+  // errorCaptured(){}  //Вызывается, когда фиксируется ошибка из любого дочернего компонента. Хук получает три аргумента: ошибку, экземпляр компонента, который вызвал ошибку, и строку, содержащую информацию где была зафиксирована ошибка. Хук может возвращать false, чтобы предотвратить дальнейшее распространение ошибки.
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+
+  </script>
+
+
+<style lang='scss'>
+
+    @font-face {
+        font-family: "logo-Regular";
+        src: url("font/19702.otf");
+    }
+
+    body {
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    body a {
+        color: black;
+        font-size: 12pt;
+        transition: .18s ease-in-out;
+    }
+
+    body a:hover {
+        color: red;
+    }
+
+    #antibug{
+        position: absolute;
+        }
+
 </style>
