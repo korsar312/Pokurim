@@ -1,4 +1,5 @@
 <template>
+
 <div id='see_menu'>
   <div id='see_menu_search'>
     <form>
@@ -7,12 +8,8 @@
     </form>
   </div>
   <div id='see_menu_basket'>
-    <a href='index.html'>
-      <div id='see_menu_basket_button'>
-        <div>
-        </div>
+      <div id='see_menu_basket_button' @click='showModal'>
       </div>
-    </a>
   </div>
   <div id='see_menu_login'>
     <input type='checkbox' id='see_menu_login_text'/><label for="see_menu_login_text">Вход/регестрация</label>
@@ -29,16 +26,29 @@
     </div>
   </div>
 </div>
+
+<Basket ref="modal"/>
+
 </template>
 
+
 <script>
+import Basket from './Basket.vue'
+
 export default {
   name: 'See_html',
   components: {
-
-  }
+      Basket,
+  },
+  methods: {
+      showModal: function () {
+                      this.$refs.modal.show = true
+                  }
+    },
 }
+
 </script>
+
 
 <style>
 #see_menu {
@@ -102,6 +112,7 @@ export default {
 		flex: none;
 		width: 173px;
 		margin: 14px 10px;
+        z-index: 3;
 	}
 
 		#see_menu_login_text {

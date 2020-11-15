@@ -12,14 +12,14 @@
 
   <div id='filter_menu_main'>
     <form id='filter_menu_main_render'>
-          <div class='filter_menu_main_cl' v-for="item1 in arr" :key="item1"> {{item1[0]}}
-               <div class='filter_menu_main_cf'  v-for="item2 in mass_plus_one(item1)" :key="item2"> {{item2[0]}}
-                    <div v-for="item3 in mass_plus_one(item2)" :key="item3">
-                        <div class='filter_menu_main_cn' v-for="item4 in item3" :key="item4"> {{item4}}
-                        </div>
-                    </div>
-                </div>
+
+          <div class='filter_menu_main_cl' :class="{ open_cl: productV1.status }" v-for='productV1 in FILT' :key='productV1.id'><p class='filter_menu_main_cl' @click='productV1.status = !productV1.status'>{{productV1.status ? "\u21d3":"\u21d1"}} {{productV1.name}}</p>
+              <div class='filter_menu_main_co' :class="{ open_co: productV2.status }" v-for='productV2 in productV1.child' :key='productV2.id'><p class='filter_menu_main_co' @click='productV2.status = !productV2.status'>{{productV2.status ? "\u21d3":"\u21d1"}} {{productV2.name}}</p>
+                  <div class='filter_menu_main_cm' @click='productV3.status = !productV3.status' :class="{ open_cm: productV3.status }" v-for='productV3 in productV2.child' :key='productV3.id'>{{productV3.name}}
+                  </div>
+              </div>
           </div>
+
     </form>
   </div>
 
@@ -30,59 +30,56 @@
 
 
 <script>
+import {mapGetters} from 'vuex'
 
 export default {
-  name: 'Filter_html',
-  methods: {
+    name: 'Filter_html',
+    computed: { ...mapGetters(['FILT']) },
+    methods: {
+        heightUp(){
+            this.isOpen = !this.isOpen
+            return this.isOpen
+        },
 
-                restruct_mass(el) {
-                    let mass = [];
-                    //let vloj = -2;
 
-                    function create_mass(el) {
-                        for(let i in el){
-                            if (el[i].length == 1) {
-                                mass.push(el);
-
-                                break;
-                            }
-                            else{
-                                let b = el[i];
-                                //vloj++;
-                                create_mass(b);
-                            }
-                            //vloj--;
-                        }
+        restruct_mass(el) {
+            let mass = [];
+            function create_mass(el) {
+                for(let i in el){
+                    if (el[i].length == 1) {
+                        mass.push(el);
+                        break;
                     }
-                    create_mass(el) ;
-                    return mass;
-                },
-
-                mass_plus_one(el){
-                    let i = 1
-                    let mass = []
-                    for(i; i<el.length; i++){
-                        mass.push(el[i]);
+                    else{
+                        let b = el[i];
+                        create_mass(b);
                     }
-                    return mass
-                },
+                }
+            }
+            create_mass(el) ;
+            return mass;
+        },
 
-  },
-  data(){
-    return{
-        arr: [
-            ['Жижа',[['Cолевые',['Да','Нет']],'Вкус',['Банан','Малина','Клубника']],['Бренд',['#1','#2','#3']],['Объем',['200мл','400мл','600мл']],['Крепость',['2мг','4мг','6мг']],['Страна',['Россия','США','Китай']]],
-            ['Железо',['наименов',['веер','киир','лур']],['Бренд',['#1','#2','#3']],['Объем',['200л','400л','600л']],['Цена',['2000','4000','6000']],['Страна',['Россия','США','Китай']]],
-            ['Поды',['Одноразовые',['Да','Нет']],['Бренд',['#1','#2','#3']],['Объем',['200л','400л','600л']],['Цена',['2000','4000','6000']],['Страна',['Россия','США','Китай']]],
-            ['Испарители/картриджи',['Бренд',['#1','#2','#3']],['Объем',['200л','400л','600л']],['Цена',['2000','4000','6000']],['Страна',['Россия','США','Китай']]],
-            ['Табак',['Бренд',['#1','#2','#3']],['Объем',['200л','400л','600л']],['Цена',['2000','4000','6000']],['Страна',['Россия','США','Китай']]],
-            ['Кальяны',['Бренд',['#1','#2','#3']],['Объем',['200л','400л','600л']],['Цена',['2000','4000','6000']],['Страна',['Россия','США','Китай']]],
-        ],
+
+        mass_plus_one(el){
+            let i = 1
+            let mass = []
+            for(i; i<el.length; i++){
+                mass.push(el[i]);
+            }
+            return mass
+        },
+
+
+    },
+
+    data(){
+        return{
+        }
+    },
+
+    components: {}
     }
-  },
-  components: {
-  }
-}
 </script>
 
 
@@ -95,7 +92,6 @@ export default {
 	width: 250px;
 	border-right: 1px dotted gray;
 	overflow: auto;
-	background: white;
 	z-index: 2;
 }
 
@@ -117,50 +113,34 @@ export default {
 		background-size: contain;
 	}
 
-    #filter_menu_main_render{
-
-
-    }
 
     .filter_menu_main_cl{
-        position: relative;
         cursor: pointer;
-        left: 40px;
-
+        margin: 0px 0px 0px 10px;
         font: 30pt logo-Regular;
-
-    }
-
-    .filter_menu_main_cl::before{
-        content:'\25B2';
-        font-size: 10pt;
-        position:absolute;
-        top: 15px;
-        left: -15px;
-    }
-
-    .filter_menu_main_cf{
-        max-height: 0px;
         overflow: hidden;
+        max-height: 45px;
         transition: .28s ease-in-out;
     }
 
-    .filter_menu_main_cn{
-        max-height: 0px;
+    .filter_menu_main_co{
+        margin: 0px 0px 0px 10px;
+        font: 25pt logo-Regular;
         overflow: hidden;
-        transition: .18s ease-in-out;
+        max-height: 45px;
+        transition: .28s ease-in-out;
     }
 
-    .open_cl::before{
-        content:'\25BC';
+    .filter_menu_main_cm{
+        margin-left: 40px;
+        font: 20pt logo-Regular;
     }
 
-    .open_cf {
-        max-height: 100px;
+    .open_cl{
+        max-height: 800px;
     }
-
-    .open_cn {
-        max-height: 100px;
+    .open_co{
+        max-height: 220px;
     }
 
 </style>

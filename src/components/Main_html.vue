@@ -1,9 +1,11 @@
 <template>
+    <div id='Showing'>Showing 1–9 of 48 results
+    </div>
+
     <main id='main'>
           <invent v-for='product in PRODUCTS'
           :key='product.article'
-          :invent_data='product'
-          @send-artic='showCh'/>
+          :invent_data='product'/>
     </main>
 </template>
 
@@ -21,9 +23,6 @@ export default {
   methods: {
       test(){alert('test')},
 
-      showCh(artic){
-          console.log(artic)
-      },
 
       ...mapActions([        //для this
           'GET_PRODUCTS_API'
@@ -49,9 +48,12 @@ export default {
 
 
 <style>
+#Showing{
+    margin: 20px 0px 20px 290px;
+}
 
 main {
-	margin-left: 250px;
+	margin-left: 270px;
 	display: flex;
 	flex-wrap: wrap;
 }

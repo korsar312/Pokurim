@@ -54,8 +54,10 @@ export default {
     }
 
     body {
+        background-color: #ffffff;
         margin: 0;
         overflow-x: hidden;
+        font-family: "Open Sans", sans-serif;
     }
 
     body a {
