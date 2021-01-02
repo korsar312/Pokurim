@@ -5,8 +5,17 @@ const store = createStore({
 
     state () {          //хранятся переменные, массивы и тд
         return {
-            basketItem: [], //в нем товары что нужно купить
+            basketItem: [], //в нем товары в корзине
             products: [],   //массив, который нужно заполнить из серва
+            products_temp: [], //в нем товары что сортируются из products
+            products_temp_arr: [],//в нем товары что отображаются по несколько штук из products_temp (конечная)
+
+            products_temp_pred: 0,    //для "загрузить еще"
+            products_temp_str: 0,     //для "загрузить еще"
+
+            but_show_str: true,       //показать кнопку загрузить еще
+            main_show: true,          //показать главный экран или нет
+
             filt: [
                 {
                   image: "ссылка на картинку",
@@ -1204,16 +1213,110 @@ const store = createStore({
 
                 },
             ],
+
         }
     },
 
 
     mutations:{         //для изменения данных в state
-        addToCart(state, n){
-            state.basketItem.push(n)
+      products_search(){
+
+            for(let i = 0; i < this.state.products_temp.length; i++){
+                  if(this.state.products_temp[i].name.includes('T', 0)){continue}
+                  else{this.state.products_temp.splice(i, 1); i--}
+            }
+
+      },
+
+      products_temp_str_up(){   // нужно было переменные добавить для этого всего...
+            this.state.products_temp_pred = this.state.products_temp_str
+            if(this.state.products_temp.length >= this.state.products_temp_str+12){
+                  this.state.products_temp_str += 11
+            }
+            else{
+                  this.state.products_temp_str += this.state.products_temp.length - this.state.products_temp_str;
+                   this.state.but_show_str = false
+             }
+            for(this.state.products_temp_pred; this.state.products_temp_pred < this.state.products_temp_str; this.state.products_temp_pred++){
+              this.state.products_temp_arr.push(this.state.products_temp[this.state.products_temp_pred])
+            }
+      },
+
+      addToCart(state, n){
+                  state.basketItem.push(n)
+                  let cookie = ''
+                  for (let i of this.state.basketItem){
+                      cookie += i.article + '.'
+                  }
+                  document.cookie = `basket=${cookie}; max-age=3600`;
+              },
+      refresh_DOM_List(){
+            this.state.but_show_str = true
+            this.state.products_temp = []
+            this.state.products_temp_arr = []
+            this.state.products_temp_pred = 0
+            this.state.products_temp_str = 0
+
+                this.state.products_temp.splice(0, this.state.products_temp.length)
+
+                for (let i in this.state.products){
+                  this.state.products_temp.push(this.state.products[i])
+                }
+
+                if(this.state.products_temp.length >= this.state.products_temp_str+12){this.state.products_temp_str += 11}
+                else{this.state.products_temp_str += this.state.products_temp.length - this.state.products_temp_str; this.state.but_show_str = false}
+                for(this.state.products_temp_pred; this.state.products_temp_pred < this.state.products_temp_str; this.state.products_temp_pred++){
+                  this.state.products_temp_arr.push(this.state.products_temp[this.state.products_temp_pred])
+                }
+
+              },
+      deleteFromBasket(state, n){
+            for  (let i of this.state.basketItem){
+                if (i.article === n){
+                    this.state.basketItem.splice(i, 1)
+                    break;
+                }
+            }
+            let cookie = ''
+            for (let i of this.state.basketItem){
+                cookie += i.article + '.'
+            }
+            document.cookie = `basket=${cookie}; max-age=3600`;
         },
-        SET_PRODUCTS_TO_STATE: (state, products) => {       //после вызыва
+      SET_PRODUCTS_TO_STATE: (state, products) => {       //после вызыва
             state.products = products                           //наш products = products из серва
+
+                  if(document.cookie.includes('basket=')) {
+
+                      let run = document.cookie.indexOf('basket=', 0) + 7
+                      let stop = document.cookie.indexOf(';', run)
+
+                      for (let i of document.cookie.slice(run, stop).split('.')){
+                          for (let a of state.products){
+                              if (a.article == i){
+                                  if(!state.basketItem.includes(a, 0)){
+                                      state.basketItem.push(a)
+                                  }
+                              }
+                          }
+                      }
+                  }
+
+              for (let i in state.products){
+                state.products_temp.push(state.products[i])
+              }
+
+              if(state.products_temp.length >= state.products_temp_str+12){
+                    state.products_temp_str += 11;
+              }
+              else{
+                    state.products_temp_str += state.products_temp.length - state.products_temp_str;
+                    this.state.but_show_str = false;
+              }
+
+              for(state.products_temp_pred; state.products_temp_pred < state.products_temp_str; state.products_temp_pred++){
+                state.products_temp_arr.push(state.products_temp[state.products_temp_pred])
+              }
         }
     },
 
@@ -1237,7 +1340,7 @@ const store = createStore({
 
     getters:{           //получение данных из state
         PRODUCTS(state){
-            return state.products
+            return state.products_temp
         },
 
         BASKETITEM(state){

@@ -65,17 +65,13 @@ import {mapGetters,mapMutations} from 'vuex'
             }
         },
         methods: {
+            ...mapMutations([
+                'deleteFromBasket',
+            ]),
+
             closeModal: function () {
                 this.show = false
             },
-            deleteFromBasket(el){
-            for  (let i of this.$store.state.basketItem){
-                if (i.article === el){
-                    this.$store.state.basketItem.splice(i, 1)
-                    break;
-                }
-            }
-        }
     }
 }
 </script>

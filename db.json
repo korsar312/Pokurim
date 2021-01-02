@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "image": "1.jpg",
+      "image": "T-shirt1",
       "name": "T-shirt 1",
       "price": 2100,
       "article": "T1",
@@ -10,7 +10,7 @@
       "amound": "1"
     },
     {
-      "image": "2.jpg",
+      "image": "T-shirt2",
       "name": "T-shirt 2",
       "price": 3150,
       "article": "T2",
@@ -19,7 +19,7 @@
       "amound": "1"
     },
     {
-      "image": "3.jpg",
+      "image": "T-shirt3",
       "name": "T-shirt 3",
       "price": 4200,
       "article": "T3",
@@ -28,7 +28,7 @@
       "amound": "1"
     },
     {
-      "image": "4.jpg",
+      "image": "T-shirt4",
       "name": "T-shirt 4",
       "price": 5300,
       "article": "T4",
@@ -37,8 +37,8 @@
       "amound": "1"
     },
     {
-      "image": "1.jpg",
-      "name": "T-shirt 1",
+      "image": "T-shirt5",
+      "name": "T-shirt 5",
       "price": 2100,
       "article": "T5",
       "available": true,
@@ -46,8 +46,8 @@
       "amound": "1"
     },
     {
-      "image": "2.jpg",
-      "name": "T-shirt 2",
+      "image": "T-shirt6",
+      "name": "T-shirt 6",
       "price": 3150,
       "article": "T6",
       "available": true,
@@ -55,8 +55,8 @@
       "amound": "1"
     },
     {
-      "image": "3.jpg",
-      "name": "T-shirt 3",
+      "image": "T-shirt7",
+      "name": "T-shirt 7",
       "price": 4200,
       "article": "T7",
       "available": false,
@@ -64,8 +64,8 @@
       "amound": "1"
     },
     {
-      "image": "4.jpg",
-      "name": "T-shirt 4",
+      "image": "T-shirt8",
+      "name": "T-shirt 8",
       "price": 5300,
       "article": "T8",
       "available": true,
@@ -73,8 +73,8 @@
       "amound": "1"
     },
 	{
-      "image": "1.jpg",
-      "name": "T-shirt 1",
+      "image": "T-shirt9",
+      "name": "T-shirt 9",
       "price": 2100,
       "article": "T9",
       "available": true,
@@ -82,8 +82,8 @@
       "amound": "1"
     },
     {
-      "image": "2.jpg",
-      "name": "T-shirt 2",
+      "image": "T-shirt10",
+      "name": "T-shirt 10",
       "price": 3150,
       "article": "T10",
       "available": true,
@@ -91,7 +91,7 @@
       "amound": "1"
     },
     {
-      "image": "3.jpg",
+      "image": "T-shirt11",
       "name": "T-shirt 3",
       "price": 4200,
       "article": "T11",
@@ -100,8 +100,8 @@
       "amound": "1"
     },
     {
-      "image": "4.jpg",
-      "name": "T-shirt 4",
+      "image": "T-shirt12",
+      "name": "T-shirt 2",
       "price": 5300,
       "article": "T12",
       "available": true,
@@ -109,8 +109,8 @@
       "amound": "1"
     },
     {
-      "image": "1.jpg",
-      "name": "T-shirt 1",
+      "image": "T-shirt13",
+      "name": "T-shirt 3",
       "price": 2100,
       "article": "T13",
       "available": true,
@@ -118,8 +118,8 @@
       "amound": "1"
     },
     {
-      "image": "2.jpg",
-      "name": "T-shirt 2",
+      "image": "T-shirt14",
+      "name": "T-shirt 1",
       "price": 3150,
       "article": "T14",
       "available": true,
@@ -127,8 +127,8 @@
       "amound": "1"
     },
     {
-      "image": "3.jpg",
-      "name": "T-shirt 3",
+      "image": "T-shirt15",
+      "name": "T-shirt 5",
       "price": 4200,
       "article": "T15",
       "available": false,
@@ -136,8 +136,8 @@
       "amound": "1"
     },
     {
-      "image": "4.jpg",
-      "name": "T-shirt 4",
+      "image": "T-shirt16",
+      "name": "T-shirt 6",
       "price": 5300,
       "article": "T16",
       "available": true,

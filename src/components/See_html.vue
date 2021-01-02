@@ -4,7 +4,7 @@
   <div id='see_menu_search'>
     <form>
       <input type='search' id='see_menu_search_site_search' name='search' placeholder='Поиск по магазину'/>
-      <input type='button' id='see_menu_search_enter' name='enter'/>
+      <input type='button' id='see_menu_search_enter' name='enter' @click='search()'/>
     </form>
   </div>
   <div id='see_menu_basket'>
@@ -34,6 +34,7 @@
 
 <script>
 import Basket from './Basket.vue'
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'See_html',
@@ -41,6 +42,15 @@ export default {
       Basket,
   },
   methods: {
+      ...mapMutations([
+            'products_search',
+            'refresh_DOM_List'
+      ]),
+      search(){
+            this.refresh_DOM_List()
+            this.products_search()
+      },
+
       showModal: function () {
                       this.$refs.modal.show = true
                   }

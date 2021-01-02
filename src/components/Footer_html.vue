@@ -19,6 +19,7 @@ export default {
 
 <style>
 footer {
+  margin-top:65px;
 	margin-left: 250px;
 	height: 500px;
 border-top: 1px dotted gray;
