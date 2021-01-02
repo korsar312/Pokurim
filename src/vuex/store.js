@@ -1219,13 +1219,25 @@ const store = createStore({
 
 
     mutations:{         //для изменения данных в state
-      products_search(){
+      products_search(state, n){
+            this.state.products_temp_arr = []
+            this.state.but_show_str = true
 
             for(let i = 0; i < this.state.products_temp.length; i++){
-                  if(this.state.products_temp[i].name.includes('T', 0)){continue}
+                  if(this.state.products_temp[i].name.includes(n, 0)){continue}
                   else{this.state.products_temp.splice(i, 1); i--}
             }
 
+            if(this.state.products_temp.length >= this.state.products_temp_str+12){
+                  this.state.products_temp_str += 11
+            }
+            else{
+                  this.state.products_temp_str += this.state.products_temp.length - this.state.products_temp_str;
+                   this.state.but_show_str = false
+             }
+            for(this.state.products_temp_pred; this.state.products_temp_pred < this.state.products_temp_str; this.state.products_temp_pred++){
+              this.state.products_temp_arr.push(this.state.products_temp[this.state.products_temp_pred])
+            }
       },
 
       products_temp_str_up(){   // нужно было переменные добавить для этого всего...
@@ -1262,13 +1274,6 @@ const store = createStore({
                 for (let i in this.state.products){
                   this.state.products_temp.push(this.state.products[i])
                 }
-
-                if(this.state.products_temp.length >= this.state.products_temp_str+12){this.state.products_temp_str += 11}
-                else{this.state.products_temp_str += this.state.products_temp.length - this.state.products_temp_str; this.state.but_show_str = false}
-                for(this.state.products_temp_pred; this.state.products_temp_pred < this.state.products_temp_str; this.state.products_temp_pred++){
-                  this.state.products_temp_arr.push(this.state.products_temp[this.state.products_temp_pred])
-                }
-
               },
       deleteFromBasket(state, n){
             for  (let i of this.state.basketItem){

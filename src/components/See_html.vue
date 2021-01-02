@@ -2,8 +2,8 @@
 
 <div id='see_menu'>
   <div id='see_menu_search'>
-    <form>
-      <input type='search' id='see_menu_search_site_search' name='search' placeholder='Поиск по магазину'/>
+    <form v-on:submit.prevent="search()">
+      <input type='search' id='see_menu_search_site_search' name='search' placeholder='Поиск по магазину' v-model="textSearch"/>
       <input type='button' id='see_menu_search_enter' name='enter' @click='search()'/>
     </form>
   </div>
@@ -41,6 +41,14 @@ export default {
   components: {
       Basket,
   },
+  data(){
+        return{
+            textSearch: ''
+       }
+ },
+  computed: {
+
+ },
   methods: {
       ...mapMutations([
             'products_search',
@@ -48,7 +56,7 @@ export default {
       ]),
       search(){
             this.refresh_DOM_List()
-            this.products_search()
+            this.products_search(this.textSearch)
       },
 
       showModal: function () {
